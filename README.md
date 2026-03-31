@@ -1,55 +1,95 @@
 # 🚀 SiteCloner v1.5 [V10 Guardian Bypass]
 ### *The Ultimate AI-Native Website Archival Engine*
 
-**Built & Engineered by:** [**mustadafinshimanto**](https://github.com/mustadafinshimanto)  
-*Lead Architect, Full-Stack Developer & AI Visionary*
+<p align="center">
+  <img src="https://img.shields.io/badge/Version-1.5.0-a78bfa?style=for-the-badge" alt="Version" />
+  <img src="https://img.shields.io/badge/Powered_By-Gemini_Flash-06b6d4?style=for-the-badge" alt="AI Powered" />
+  <img src="https://img.shields.io/badge/Architecture-Absolute_Power-34d399?style=for-the-badge" alt="Architecture" />
+  <img src="https://img.shields.io/badge/Lead_Architect-mustadafinshimanto-fbbf24?style=for-the-badge" alt="Architect" />
+</p>
 
 ---
 
-## 💎 The V10 "Absolute Fidelity" Evolution
+## 💎 The V10 "Absolute Fidelity" Vision
 
-SiteCloner v1.5 is a professional-grade archival suite designed to capture, reconstruct, and preserve modern websites with extreme precision. Moving beyond simple HTML copying, the **V10 Guardian Bypass** engine uses advanced headless browser automation and AI-driven "healing" to produce pixel-perfect clones.
+**SiteCloner v1.5** is a professional-grade archival suite architected to capture, reconstruct, and preserve modern websites with zero-loss precision. Moving beyond standard static scraping, the **V10 Guardian Bypass** engine leverages advanced headless browser automation and AI-driven neural healing to produce high-fidelity clones of even the most complex web infrastructures.
 
-### 🌟 Key Architectural Upgrades
+### 🏛️ Lead Architect & Developer
+**[mustadafinshimanto](https://github.com/mustadafinshimanto)**  
+*Visionary Engineer | AI-Native Developer | Lead Architect*
 
-#### 🛡️ V10: Guardian Bypass (NEW)
-- **Surgical Extraction**: Automatically identifies and purges reCAPTCHA, hCaptcha, and Cloudflare Turnstile blocks.
-- **Project Janitor Upgrade**: Ensures static archives are 100% clean of broken verification widgets that cannot work offline.
+---
 
-#### 🛡️ V9: Infinite Fidelity Preview
-- **Preview Shield (Service Worker)**: A dedicated interception layer that forces browsers to resolve every asset correctly.
+## ⚡ The V10 "Absolute Power" Matrix
 
-#### 🌊 V8: Deep Crawl "Absolute Power"
-- **Recursive Scraper**: Discovers and archives entire website structures by following internal same-origin links automatically.
-- **Holographic Navigation**: Intelligently remaps internal links to local `.html` files for seamless offline browsing.
+| Generation | Breakthrough | Capability |
+| :--- | :--- | :--- |
+| **V10** | **Guardian Bypass** | Automated surgical extraction of reCAPTCHA, hCaptcha, and Cloudflare Turnstile verification blocks. |
+| **V9** | **Infinite Preview** | Service Worker "Preview Shield" for 100% asset resolution and **Absolute Launch** iframe bypass. |
+| **V8** | **Deep Crawl** | Recursive discovery and archival of entire multi-page domain structures with internal link remapping. |
+| **V7** | **Holographic Styling** | "Baking" of live computed states, CSS variables, and Shadow DOM styles directly into the archive. |
 
-#### 🌈 V7: Holographic Style Injection
-- **Style Baking**: Captures live computed states, CSS variables, and keyframe animations, injecting them directly into the final archive for visual identity parity.
-- **Shadow DOM Recursion**: Deep-scans and extracts styles hidden within Shadow Roots.
+---
+
+## 🛡️ Key Architectural Pillars
+
+### 🧹 Project Janitor Protocol (V10)
+SiteCloner isn't just about copying; it's about cleaning. The **Project Janitor** automatically identifies and purges:
+- 🚫 **Security Guardians**: reCAPTCHA, hCaptcha, and Turnstile blocks.
+- 🚫 **UI Friction**: Consent banners, cookie modals, and non-functional disclaimer popups.
+- 🚫 **Broken Scripts**: Neutralization of non-functional server-side dependency scripts.
+
+### 🌈 Infinite Fidelity Preview (V9)
+The V9 Preview system introduces the **Preview Shield**, a specialized Service Worker that intercepts and corrects all browser requests. This ensures that even sites using modern routing (Next.js/React) resolve every asset correctly in your local environment.
+
+### 🧠 AI-Native Neural Healing
+Powered by **Google Gemini 1.5 Flash**, SiteCloner performs a "Deep-Scan" on failed network traces to fix broken paths and restore layout fidelity in real-time.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js v18+
+- Google Gemini API Key
+
+### Installation
+
+```bash
+# Clone the Absolute Power suite
+git clone https://github.com/mustadafinshimanto/SiteCloner-v1.5.git
+
+# Enter the foundry
+cd SiteCloner-v1.5
+
+# Forge the dependencies
+npm install
+```
+
+### Configuration
+Create a `.env` file in the root directory:
+```env
+PORT=3000
+GEMINI_API_KEY=your_api_key_here
+GEMINI_MODEL=gemini-1.5-flash
+```
 
 ---
 
 ## ⚠️ Important Accuracy Disclaimer
 
 > [!WARNING]  
-> **The 70-80% Reality**: While SiteCloner v1.5 [V9] is one of the most powerful archival tools ever built, modern web complexity is infinite. On extremely complex, high-security, or heavily server-side dependent (SSR) sites, the AI-Native engine typically achieves **70% to 80% visual and functional accuracy**. 
+> **The Complexity Frontier**: Modern web complexity is infinite. On extremely complex, high-security, or heavily server-side dependent (SSR) sites, the AI-Native engine typically achieves **70% to 80% visual and functional accuracy**. 
 >
-> Some dynamic components, server-side data fetches, and protected API endpoints cannot be captured in a static clone. For the highest fidelity experience, always use the **Absolute Launch** feature or the **`run.bat`** file provided in every export.
+> Some dynamic components and protected API endpoints cannot be captured in a static clone. For the highest fidelity experience, always use the **Absolute Launch** feature or the **`run.bat`** file included in every export.
 
 ---
 
-## 🛠️ Performance Features
-- **AI-Native Healing**: Uses Gemini 1.5 Flash to surgically repair layout shifts and broken paths.
-- **Network Interception**: Catches and categorizes every asset by MIME type (CSS, JS, Fonts, Images, Audio, Video).
-- **HolographicVision Delayer**: Performs pixel-by-pixel comparative analysis to force visual identity.
-- **Project Janitor Protocol**: Automatically removes blocking elements like cookie banners and disclaimer popups.
-
-## 🚀 Quick Start
-1. Clone the repository.
-2. Create a `.env` file with your `GEMINI_API_KEY`.
-3. Run `npm install` and `npm start`.
-4. Enter any URL and activate **"Full Website"** for a deep archival.
+## ⚖️ Legal & Ethical Use
+**SiteCloner** is engineered for personal learning, authorized security testing, and educational archival purposes. Users are solely responsible for ensuring their use of this software complies with copyright law and website Terms of Service. Always respect intellectual property.
 
 ---
 
-**⚠️ Legal Disclaimer:** This tool is intended for personal learning, authorized security testing, and educational archival purposes. The architect and developers are not responsible for any misuse. Always respect copyright and website Terms of Service.
+<p align="center">
+  <i>Engineered with absolute precision by mustadafinshimanto.</i>
+</p>
