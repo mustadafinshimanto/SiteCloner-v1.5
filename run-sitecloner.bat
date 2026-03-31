@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-title SiteCloner v1.0 — Premium Website Extraction Engine
+title SiteCloner v2.0 — Premium Website Extraction Engine
 
 REM --- Setup colors (Standard Windows CMD ANSI support) ---
 cls
@@ -50,7 +50,7 @@ if defined AI_PROVIDER (
   )
   if "!AI_PROVIDER!"=="gemini" (
     if defined GEMINI_API_KEY (
-      set "AI_STATUS=ENABLED (Gemini 1.5 Flash)"
+      set "AI_STATUS=ENABLED (Gemini 1.5 Flash - Neural v2.0)"
     )
   )
 )

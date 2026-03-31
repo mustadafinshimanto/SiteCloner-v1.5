@@ -1,8 +1,8 @@
-# 🚀 SiteCloner v1.5 [V10 Guardian Bypass]
+# 🚀 SiteCloner v2.0 [Ultimate Neural Suite]
 ### *The Ultimate AI-Native Website Archival Engine*
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-1.5.0-a78bfa?style=for-the-badge" alt="Version" />
+  <img src="https://img.shields.io/badge/Version-2.0.0-a78bfa?style=for-the-badge" alt="Version" />
   <img src="https://img.shields.io/badge/Powered_By-Gemini_Flash-06b6d4?style=for-the-badge" alt="AI Powered" />
   <img src="https://img.shields.io/badge/Architecture-Absolute_Power-34d399?style=for-the-badge" alt="Architecture" />
   <img src="https://img.shields.io/badge/Lead_Architect-mustadafinshimanto-fbbf24?style=for-the-badge" alt="Architect" />
@@ -12,7 +12,7 @@
 
 ## 💎 The V10 "Absolute Fidelity" Vision
 
-**SiteCloner v1.5** is a professional-grade archival suite architected to capture, reconstruct, and preserve modern websites with zero-loss precision. Moving beyond standard static scraping, the **V10 Guardian Bypass** engine leverages advanced headless browser automation and AI-driven neural healing to produce high-fidelity clones of even the most complex web infrastructures.
+**SiteCloner v2.0** is a professional-grade archival suite architected to capture, reconstruct, and preserve modern websites with zero-loss precision. Moving beyond standard static scraping, the **V10 Guardian Bypass** engine leverages advanced headless browser automation and AI-driven neural healing to produce high-fidelity clones of even the most complex web infrastructures.
 
 ### 🏛️ Lead Architect & Developer
 **[mustadafinshimanto](https://github.com/mustadafinshimanto)**  
@@ -57,10 +57,10 @@ Powered by **Google Gemini 1.5 Flash**, SiteCloner performs a "Deep-Scan" on fai
 
 ```bash
 # Clone the Absolute Power suite
-git clone https://github.com/mustadafinshimanto/SiteCloner-v1.5.git
+git clone https://github.com/mustadafinshimanto/SiteCloner-v2.0.git
 
 # Enter the foundry
-cd SiteCloner-v1.5
+cd SiteCloner-v2.0
 
 # Forge the dependencies
 npm install
