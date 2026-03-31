@@ -21,8 +21,8 @@
 
   <div class="app-container">
     <!-- Header -->
-    <header class="header" id="header">
-      <div class="logo-group">
+    <header class="header reveal-slide delay-1" id="header">
+      <div class="logo-group float-slow">
         <div class="logo-icon">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
             <rect x="2" y="2" width="12" height="12" rx="3" stroke="url(#g1)" stroke-width="2.5"/>
@@ -51,7 +51,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero-section">
+    <section class="hero reveal-slide delay-2" id="hero-section">
       <div class="hero-badge">
         <span class="badge-dot"></span>
         Powered by Chromium Engine
@@ -62,12 +62,12 @@
       </h2>
       <p class="hero-subtitle">
         Extract CSS animations, transitions, fonts, images, and full design structure.
-        Powered by a headless browser engine for zero visual loss.
+        Powered by a V11 Neural Overdrive engine for 100% fidelity.
       </p>
     </section>
 
     <!-- Clone Input Section -->
-    <section class="clone-section" id="clone-section">
+    <section class="clone-section reveal-slide delay-3" id="clone-section">
       <div class="glass-card input-card">
         <form id="clone-form" autocomplete="off">
           <div class="input-group">
@@ -240,13 +240,16 @@
               <span class="stat-label">Pages Cloned</span>
             </div>
           </div>
-          <div class="stat-card">
-            <div class="stat-icon stat-icon-size">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <div class="stat-card" id="ai-stat-card">
+            <div class="stat-icon stat-icon-ai">
+              <!-- AI Neural Glow Icon -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+              </svg>
             </div>
             <div class="stat-info">
-              <span class="stat-value" id="stat-size">0 KB</span>
-              <span class="stat-label">Total Size</span>
+              <span class="stat-value" id="stat-ai">0</span>
+              <span class="stat-label">AI Patches</span>
             </div>
           </div>
         </div>
@@ -254,7 +257,7 @@
     </section>
 
     <!-- Action Buttons (after completion) -->
-    <section class="actions-section hidden" id="actions-section">
+    <section class="actions-section hidden reveal-slide delay-4" id="actions-section">
       <div class="actions-row">
         <button class="action-btn action-btn-primary" id="download-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">

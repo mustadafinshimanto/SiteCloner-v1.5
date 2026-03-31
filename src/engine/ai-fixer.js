@@ -58,12 +58,13 @@ export class AIFixer {
   }
 
   /**
-   * Main Absolute Power Workflow
+   * Main Absolute Power Workflow - Updated for V11 Neural Overdrive
+   * Now performs a diagnostic fix on any target page.
    */
-  async finish({ url, outputDir, jobId, viewport, userAgent, browser }) {
+  async finish({ url, outputDir, jobId, viewport, userAgent, browser, targetFile = 'index.html' }) {
     const port = process.env.PORT || 3000;
     const baseUrl = `http://localhost:${port}`;
-    const clonePreviewUrl = `${baseUrl}/api/preview/${jobId}/index.html`;
+    const clonePreviewUrl = `${baseUrl}/api/preview/${jobId}/${targetFile}`;
 
     ensureDirSync(path.join(outputDir, 'ai'));
 
@@ -95,14 +96,14 @@ export class AIFixer {
       const [cloneDiag, cloneScreenshotPath] = await this.captureDeepDiagnostics({
         browser: localBrowser,
         targetUrl: clonePreviewUrl,
-        label: 'clone',
+        label: `clone-${targetFile.replace(/\//g, '_')}`,
         outputDir,
         viewport: viewportToUse,
         userAgent,
       });
 
-      this.emit({ phase: 'ai', message: 'AI Finisher: Synthesizing Code Context (Absolute Depth)...', percent: 88.5 });
-      const patchInput = this.buildHyperContext(outputDir);
+      this.emit({ phase: 'ai', message: `AI Healing Page: ${targetFile} (Absolute Depth)...`, percent: 88.5 });
+      const patchInput = this.buildHyperContext(outputDir, targetFile);
 
       this.emit({ phase: 'ai', message: 'AI Finisher: Activating Gemini V6 Ultra Inference...', percent: 88 });
 
@@ -184,11 +185,11 @@ export class AIFixer {
   }
 
   /**
-   * Build an exhaustive context map of the project.
+   * Build an exhaustive context map for a specific target file.
    */
-  buildHyperContext(outputDir) {
-    const indexPath = path.join(outputDir, 'index.html');
-    const indexHtml = readTextSafe(indexPath) || '';
+  buildHyperContext(outputDir, targetFile) {
+    const targetPath = path.join(outputDir, targetFile);
+    const targetHtml = readTextSafe(targetPath) || '';
 
     const cssFiles = [];
     const walk = (dir) => {
@@ -205,7 +206,8 @@ export class AIFixer {
     walk(path.join(outputDir, 'css'));
 
     return {
-      indexHtml: indexHtml.length > this.maxFileChars ? indexHtml.slice(0, this.maxFileChars) : indexHtml,
+      targetFile,
+      targetHtml: targetHtml.length > this.maxFileChars ? targetHtml.slice(0, this.maxFileChars) : targetHtml,
       cssFiles: cssFiles.slice(0, this.maxCssFiles)
     };
   }
@@ -236,8 +238,8 @@ Original State: ${JSON.stringify(originalDiag)}
 Clone State: ${JSON.stringify(cloneDiag)}
 
 YOUR MISSION:
-1. PIXEL-PERFECT RECOVERY: Compare the two screenshots. If colors, layouts, or spacing are broken, generate CSS patches in the <style> block of index.html or in the relevant CSS files.
-2. JANITOR PROTOCOL: Any Disclaimer, I Agree, or Cookie popups that block the view in the clone MUST BE DELETED (provide a deletion patch for the whole element).
+1. PIXEL-PERFECT RECOVERY: Compare the two screenshots. If colors, layouts, or spacing are broken, generate CSS patches in the <style> block of the target HTML file or in the relevant CSS files.
+2. GUARDIAN GHOST REMOVAL: Any remaining reCAPTCHA artifacts, Captcha forms, or "I Agree" banners that block the view MUST BE DELETED (provide a deletion patch for the whole element).
 3. PATH NORMALIZATION: Fix any 404 network errors seen in the diagnostic log by correcting paths (check for windows backslashes vs power-forward-slashes).
 4. LOGIC RE-WIRING: If a button or menu is broken, try to wrap it in a Link or make it functional with basic CSS hover states.
 
@@ -246,7 +248,7 @@ ONLY OUTPUT VALID JSON. DO NOT TALK.
 {
   "patches": [
     {
-      "file": "index.html" | "css/<path>.css",
+      "file": "target filename",
       "search": "<exact existing code substring>",
       "replace": "<new code>",
       "reason": "<reasoning>"

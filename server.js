@@ -76,7 +76,7 @@ app.post('/api/clone', (req, res) => {
     }
   });
 
-  cloner.clone(url, outputDir)
+  cloner.clone(url, outputDir, jobId)
     .then(result => {
       job.status = 'completed';
       job.result = result;

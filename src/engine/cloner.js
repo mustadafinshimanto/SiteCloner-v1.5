@@ -32,7 +32,7 @@ export class SiteCloner extends EventEmitter {
   /**
    * Clone a website and produce output files.
    */
-  async clone(url, outputDir) {
+  async clone(url, outputDir, jobId) {
     const startTime = Date.now();
     const isFullClone = this.options.fullClone === true;
     const maxPages = this.options.maxPages || (isFullClone ? 20 : 1);
@@ -60,6 +60,10 @@ export class SiteCloner extends EventEmitter {
       const results = [];
       const interceptor = new NetworkInterceptor(outputDir);
       const packager = new Packager(outputDir);
+      const aiFixer = new AIFixer({
+        apiKey: process.env.GEMINI_API_KEY,
+        onProgress: (p) => this.emit('progress', p)
+      });
       
       let pagesCloned = 0;
 
@@ -75,7 +79,7 @@ export class SiteCloner extends EventEmitter {
           percent: Math.min(90, (pagesCloned / maxPages) * 100) 
         });
 
-        const pageResult = await this.capturePage(currentUrl, browser, interceptor, packager, pagesCloned === 1);
+        const pageResult = await this.capturePage(currentUrl, browser, interceptor, packager, pagesCloned === 1, aiFixer, jobId);
         results.push(pageResult);
 
         if (isFullClone && pagesCloned < maxPages) {
@@ -121,7 +125,7 @@ export class SiteCloner extends EventEmitter {
   /**
    * Capture a single page and its assets.
    */
-  async capturePage(url, browser, interceptor, packager, isInitial = false) {
+  async capturePage(url, browser, interceptor, packager, isInitial = false, aiFixer = null, jobId = null) {
     const page = await browser.newPage();
     try {
       // Set viewport
@@ -218,6 +222,19 @@ export class SiteCloner extends EventEmitter {
         packager.setupPreviewShield();
         // Rewrite CSS files for global assets
         packager.rewriteCSSFiles(urlRewriter);
+      }
+
+      // V11: Neural Overdrive — High-Fidelity AI Healing Pass
+      if (this.options.aiFinish && aiFixer && jobId) {
+        await aiFixer.finish({
+          url,
+          outputDir: this.outputDir || path.dirname(this.outputDir || path.join(process.cwd(), 'clones', jobId)),
+          jobId,
+          viewport: this.options.viewport,
+          userAgent: this.options.userAgent,
+          browser,
+          targetFile: filename
+        });
       }
 
       return { url, filename, html: rewrittenHTML, metaInfo };

@@ -39,6 +39,8 @@
   const statFonts = document.getElementById('stat-fonts');
   const statAnimations = document.getElementById('stat-animations');
   const statPages = document.getElementById('stat-pages');
+  const statAI = document.getElementById('stat-ai');
+  const aiStatCard = document.getElementById('ai-stat-card');
   const statSize = document.getElementById('stat-size');
 
   // ===== State =====
@@ -174,11 +176,27 @@
   }
 
   // ===== Update Progress UI =====
+  // ===== Update Progress UI =====
   function updateProgress(data) {
     // Update progress bar
     if (typeof data.percent === 'number') {
       progressBar.style.width = data.percent + '%';
       progressPercent.textContent = Math.round(data.percent) + '%';
+    }
+
+    // V11: Update Neural Stats & Glow
+    if (data.phase === 'ai') {
+      aiStatCard.classList.add('active-ai');
+      if (typeof data.patches === 'number') {
+        const currentCount = parseInt(statAI.textContent) || 0;
+        statAI.textContent = currentCount + data.patches;
+      }
+    } else if (data.phase !== 'ai' && aiStatCard.classList.contains('active-ai')) {
+      // Clear AI glow if we leave AI phase (e.g. to download or done)
+      // but only if we weren't just in the middle of a continuous AI pass
+      if (data.phase !== 'init' && data.phase !== 'download') {
+         aiStatCard.classList.remove('active-ai');
+      }
     }
 
     // Update status text
@@ -229,6 +247,11 @@
       statAnimations.textContent = (stats.css?.keyframes || 0) + (stats.css?.animationRules || 0);
       statPages.textContent = stats.pages || 1;
       statSize.textContent = formatSize(stats.assets?.totalSize || result.zipSize || 0);
+      
+      // V11: Final Neural Healing Count
+      aiStatCard.classList.remove('active-ai');
+      statAI.textContent = stats.ai?.appliedPatches || statAI.textContent;
+      
       statsGrid.classList.remove('hidden');
     }
 
@@ -414,6 +437,11 @@
     statusIndicator.classList.remove('done', 'error');
     progressLog.innerHTML = '';
     statsGrid.classList.add('hidden');
+    
+    // V11: Neural Stat Reset
+    if (statAI) statAI.textContent = '0';
+    if (aiStatCard) aiStatCard.classList.remove('active-ai');
+    
     removeErrors();
   }
 
