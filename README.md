@@ -15,13 +15,15 @@ SiteCloner is a premium, AI-powered tool architected by **mustadafinshimanto** f
 *   **Deep CSS Extraction**: Aggressively captures keyframes and font-faces, optimized for modern framework-heavy sites.
 *   **Quick Preview**: Generates a local `run.bat` for every clone for one-click launching.
 
-## 🛠️ Tech Stack
+## 🤖 What the AI Does (V6 Ultra Engine)
 
-*   **Architected by**: mustadafinshimanto
-*   **Engine**: Puppeteer (Headless Chrome)
-*   **Backend**: Node.js / Express
-*   **Intelligence**: Google Gemini 2.5 & DeepSeek V3
-*   **Frontend**: Professional Glassmorphic Dashboard
+SiteCloner isn't just a blind downloader—it's an **AI-powered architect** that "heals" the website after capture. The integrated Gemini/DeepSeek engine performs the following mission-critical tasks:
+
+*   **Holographic Vision Comparison**: The AI captures a screenshot of both the original site and your clone. It performs a **pixel-by-pixel delta analysis** to identify missing images, shifted layouts, or broken typography that the standard cloner missed.
+*   **The "Janitor" Protocol**: Modern sites often use disclaimers, cookie banners, or "I Agree" modals that block the page. Since their JavaScript often breaks in a static clone, the AI **surgically deletes** these blocking elements to ensure a clean, professional landing page.
+*   **Fidelity Healing**: It scans the cloned code for broken asset paths (like Windows backslashes `\` or missing base URLs) and generates real-time patches to fix them.
+*   **Deep CSS Awareness**: The AI analyzes up to **25 separate CSS files** simultaneously to find and restore missing global variables (`--primary-color`, etc.) and animation keyframes.
+*   **Self-Healing Data Bridge**: It monitors its own output to ensure all patches are valid JSON, preventing crashes even when handling complex, framework-heavy code.
 
 ## 🔧 Installation
 
