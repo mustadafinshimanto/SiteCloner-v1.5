@@ -183,6 +183,9 @@ export class SiteCloner extends EventEmitter {
         );
       }
 
+      // V7: Inject Holographic Styles (Bake live computed state and variables)
+      rewrittenHTML = packager.injectHolographicStyles(rewrittenHTML, computedStyles, cssExtractor.customProperties);
+
       // Write the main HTML
       packager.writeHTML(rewrittenHTML);
       
@@ -336,37 +339,6 @@ export class SiteCloner extends EventEmitter {
     } catch {
       // Ignore pages without Font Loading API support.
     }
-  }
-
-  /**
-   * Auto-scroll the page to trigger lazy loading.
-   */
-  async autoScroll(page) {
-    await page.evaluate(async () => {
-      await new Promise((resolve) => {
-        let totalHeight = 0;
-        const distance = 400;
-        const timer = setInterval(() => {
-          const scrollHeight = document.body.scrollHeight;
-          window.scrollBy(0, distance);
-          totalHeight += distance;
-
-          if (totalHeight >= scrollHeight) {
-            // Scroll back to top
-            window.scrollTo(0, 0);
-            clearInterval(timer);
-            resolve();
-          }
-        }, 100);
-
-        // Safety timeout
-        setTimeout(() => {
-          clearInterval(timer);
-          window.scrollTo(0, 0);
-          resolve();
-        }, 15000);
-      });
-    });
   }
 
   /**

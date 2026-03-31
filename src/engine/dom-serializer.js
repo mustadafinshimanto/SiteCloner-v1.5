@@ -146,40 +146,55 @@ export class DOMSerializer {
   /**
    * Extract computed styles for key elements (fallback for critical elements).
    */
-  async extractComputedStyles(page, selectors = ['body', 'header', 'nav', 'main', 'footer', 'h1', 'h2', 'h3', '.hero', '.header', '.nav', '.footer']) {
-    const computedStyles = await page.evaluate((sels) => {
+  /**
+   * Extract computed styles for visually significant elements (V7 Extreme Fidelity).
+   * Instead of a fixed list, it now uses a heuristic to identify the most "important" elements.
+   */
+  async extractComputedStyles(page) {
+    const computedStyles = await page.evaluate(() => {
       const results = {};
-      for (const selector of sels) {
-        const elements = document.querySelectorAll(selector);
-        if (elements.length === 0) continue;
-        const el = elements[0];
+      const importantProps = [
+        'background-color', 'background-image', 'background-size', 'color', 
+        'font-family', 'font-size', 'font-weight', 'line-height',
+        'border', 'border-radius', 'box-shadow', 'text-shadow',
+        'padding', 'margin', 'width', 'max-width', 'min-height',
+        'display', 'position', 'top', 'left', 'right', 'bottom', 'z-index',
+        'opacity', 'transform', 'transition', 'animation',
+        'backdrop-filter', '-webkit-backdrop-filter', 'mask-image', 'clip-path'
+      ];
+
+      // Importance Heuristic: Find elements with specific "Premium" traits
+      const allElements = Array.from(document.querySelectorAll('*'));
+      const candidates = allElements.filter(el => {
+        const style = window.getComputedStyle(el);
+        // Elements with transforms, filters, absolute positioning, or custom animations
+        return style.transform !== 'none' || 
+               style.position === 'absolute' || 
+               style.position === 'fixed' ||
+               style.display === 'flex' ||
+               style.display === 'grid' ||
+               style.backdropFilter !== 'none' ||
+               (style.animationName !== 'none' && style.animationName !== '');
+      }).slice(0, 300); // Limit to top 300 to maintain performance
+
+      for (const el of candidates) {
         const computed = window.getComputedStyle(el);
-
-        // Extract only important visual properties
-        const importantProps = [
-          'background', 'background-color', 'background-image', 'background-size',
-          'color', 'font-family', 'font-size', 'font-weight', 'line-height',
-          'letter-spacing', 'text-transform', 'text-decoration',
-          'border', 'border-radius', 'box-shadow', 'text-shadow',
-          'padding', 'margin', 'width', 'max-width', 'min-height',
-          'display', 'flex-direction', 'align-items', 'justify-content', 'gap',
-          'grid-template-columns', 'grid-template-rows',
-          'position', 'top', 'left', 'right', 'bottom', 'z-index',
-          'opacity', 'transform', 'transition', 'animation',
-          'overflow', 'backdrop-filter', '-webkit-backdrop-filter',
-        ];
-
         const styles = {};
         for (const prop of importantProps) {
           const value = computed.getPropertyValue(prop);
+          // Only capture non-default values to keep payload lean
           if (value && value !== 'none' && value !== 'normal' && value !== 'auto' && value !== '0px' && value !== 'rgba(0, 0, 0, 0)') {
             styles[prop] = value;
           }
         }
-        results[selector] = styles;
+        
+        // Use a unique selector-like key or data-attribute if possible
+        const id = el.id || `v7-${Math.random().toString(36).substr(2, 9)}`;
+        if (!el.id) el.setAttribute('data-v7-id', id);
+        results[el.id ? `#${el.id}` : `[data-v7-id="${id}"]`] = styles;
       }
       return results;
-    }, selectors);
+    });
 
     return computedStyles;
   }

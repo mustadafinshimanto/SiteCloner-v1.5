@@ -15,7 +15,7 @@ export class CSSExtractor {
   }
 
   /**
-   * Extract all CSS rules from the page's stylesheets.
+   * Extract all CSS rules from the page's stylesheets, including Shadow DOM content.
    */
   async extract(page) {
     const extracted = await page.evaluate(() => {
@@ -33,112 +33,67 @@ export class CSSExtractor {
           try {
             // @keyframes
             if (rule.type === CSSRule.KEYFRAMES_RULE) {
-              keyframes.push({
-                name: rule.name,
-                cssText: rule.cssText,
-                source: sheetHref,
-              });
+              keyframes.push({ name: rule.name, cssText: rule.cssText, source: sheetHref });
             }
             // @font-face
             else if (rule.type === CSSRule.FONT_FACE_RULE) {
-              fontFaces.push({
-                cssText: rule.cssText,
-                source: sheetHref,
-              });
+              fontFaces.push({ cssText: rule.cssText, source: sheetHref });
             }
             // @media
             else if (rule.type === CSSRule.MEDIA_RULE) {
-              mediaQueries.push({
-                conditionText: rule.conditionText || rule.media?.mediaText || '',
-                cssText: rule.cssText,
-                source: sheetHref,
-              });
-              // Recurse into media rules
+              mediaQueries.push({ conditionText: rule.conditionText || rule.media?.mediaText || '', cssText: rule.cssText, source: sheetHref });
               processRules(rule.cssRules, sheetHref);
             }
             // @supports, @layer, or nested rules
-            else if (rule.type === CSSRule.SUPPORTS_RULE || 
-                     rule.type === 7 /* CSSRule.LAYER_BLOCK_RULE */ ||
-                     rule.type === 12 /* CSSRule.LAYER_STATEMENT_RULE */) {
+            else if (rule.type === CSSRule.SUPPORTS_RULE || rule.type === 7 /* LAYER_BLOCK */ || rule.type === 12 /* LAYER_STATEMENT */) {
               if (rule.cssText) allCSSText.push(rule.cssText);
               if (rule.cssRules) processRules(rule.cssRules, sheetHref);
             }
             // Standard style rules
             else if (rule.type === CSSRule.STYLE_RULE) {
               const style = rule.style;
-
-              // Check for custom properties
               for (let i = 0; i < style.length; i++) {
                 const prop = style[i];
                 if (prop.startsWith('--')) {
                   customProperties.set(prop, style.getPropertyValue(prop));
                 }
               }
-
-              // Check for animation properties
-              const animation = style.getPropertyValue('animation') || style.getPropertyValue('animation-name');
-              if (animation && animation !== 'none') {
-                animationRules.push({
-                  selector: rule.selectorText,
-                  animation: style.getPropertyValue('animation'),
-                  animationName: style.getPropertyValue('animation-name'),
-                  animationDuration: style.getPropertyValue('animation-duration'),
-                  animationTimingFunction: style.getPropertyValue('animation-timing-function'),
-                  animationDelay: style.getPropertyValue('animation-delay'),
-                  animationIterationCount: style.getPropertyValue('animation-iteration-count'),
-                  animationDirection: style.getPropertyValue('animation-direction'),
-                  animationFillMode: style.getPropertyValue('animation-fill-mode'),
-                  cssText: rule.cssText,
-                  source: sheetHref,
-                });
-              }
-
-              // Check for transition properties
-              const transition = style.getPropertyValue('transition');
-              if (transition && transition !== 'none' && transition !== 'all 0s ease 0s') {
-                transitionRules.push({
-                  selector: rule.selectorText,
-                  transition: style.getPropertyValue('transition'),
-                  transitionProperty: style.getPropertyValue('transition-property'),
-                  transitionDuration: style.getPropertyValue('transition-duration'),
-                  transitionTimingFunction: style.getPropertyValue('transition-timing-function'),
-                  transitionDelay: style.getPropertyValue('transition-delay'),
-                  cssText: rule.cssText,
-                  source: sheetHref,
-                });
-              }
             }
-          } catch (e) {
-            // Skip individual rule errors
+          } catch (e) {}
+        }
+      }
+
+      function scanSheets(root) {
+        if (!root) return;
+        const sheets = root.styleSheets || [];
+        for (const sheet of sheets) {
+          try { processRules(sheet.cssRules, sheet.href || 'inline'); } catch (e) {}
+        }
+        // Recursive Shadow DOM scan (V7 Extreme Fidelity)
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT);
+        let node = walker.nextNode();
+        while (node) {
+          if (node.shadowRoot) {
+            scanSheets(node.shadowRoot);
           }
+          node = walker.nextNode();
         }
       }
 
-      // Iterate over all stylesheets
-      for (const sheet of document.styleSheets) {
-        try {
-          const href = sheet.href || 'inline';
-          processRules(sheet.cssRules, href);
-        } catch (e) {
-          // Cross-origin stylesheet, can't read rules directly
-          // We rely on the network interceptor to capture these
+      // Initial Pass: Global Sheets
+      scanSheets(document);
+
+      // V7 Holographic Pass: Capture all active Computed CSS Variables from root
+      const rootComputed = window.getComputedStyle(document.documentElement);
+      // Modern browsers allow iteration over computed style properties (including custom ones in Chrome/Safari)
+      for (let i = 0; i < rootComputed.length; i++) {
+        const prop = rootComputed[i];
+        if (prop.startsWith('--')) {
+          customProperties.set(prop, rootComputed.getPropertyValue(prop));
         }
       }
 
-      // Also extract root-level custom properties
-      const rootEl = document.documentElement;
-      const rootComputed = window.getComputedStyle(rootEl);
-      // Note: getComputedStyle doesn't enumerate custom properties in all browsers,
-      // so we also check inline style and :root rules above
-
-      return {
-        keyframes,
-        fontFaces,
-        customProperties: Object.fromEntries(customProperties),
-        animationRules,
-        transitionRules,
-        mediaQueries,
-      };
+      return { keyframes, fontFaces, customProperties: Object.fromEntries(customProperties), animationRules, transitionRules, mediaQueries };
     });
 
     this.keyframes = extracted.keyframes;

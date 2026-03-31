@@ -128,6 +128,36 @@ export class Packager {
   }
 
   /**
+   * Inject "Holographic" computed styles directly into the HTML to ensure visual fidelity (V7 Extreme).
+   */
+  injectHolographicStyles(html, computedStyles, customProperties) {
+    let holographicCSS = '\n/* ===== V7 EXTREME FIDELITY: HOLOGRAPHIC STYLE INJECTION ===== */\n';
+    
+    // 1. Inject Live CSS Variables
+    if (customProperties && Object.keys(customProperties).length > 0) {
+      holographicCSS += ':root {\n';
+      for (const [prop, value] of Object.entries(customProperties)) {
+        holographicCSS += `  ${prop}: ${value} !important;\n`;
+      }
+      holographicCSS += '}\n\n';
+    }
+
+    // 2. Inject Element-Level Computed Snapshots
+    if (computedStyles && Object.keys(computedStyles).length > 0) {
+      for (const [selector, styles] of Object.entries(computedStyles)) {
+        holographicCSS += `${selector} {\n`;
+        for (const [prop, value] of Object.entries(styles)) {
+          holographicCSS += `  ${prop}: ${value} !important;\n`;
+        }
+        holographicCSS += '}\n\n';
+      }
+    }
+
+    const styleBlock = `\n<style id="v7-holographic-style">\n${holographicCSS}</style>\n`;
+    return html.replace('</head>', `${styleBlock}</head>`);
+  }
+
+  /**
    * Create a ZIP archive of the output directory.
    */
   async createZip(zipPath) {
