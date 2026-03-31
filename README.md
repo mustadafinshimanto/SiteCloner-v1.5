@@ -1,4 +1,4 @@
-# 🚀 SiteCloner v1.5 [V9 Infinite Fidelity]
+# 🚀 SiteCloner v1.5 [V10 Guardian Bypass]
 ### *The Ultimate AI-Native Website Archival Engine*
 
 **Built & Engineered by:** [**mustadafinshimanto**](https://github.com/mustadafinshimanto)  
@@ -6,15 +6,18 @@
 
 ---
 
-## 💎 The V9 "Absolute Power" Evolution
+## 💎 The V10 "Absolute Fidelity" Evolution
 
-SiteCloner v1.5 is a professional-grade archival suite designed to capture, reconstruct, and preserve modern websites with extreme precision. Moving beyond simple HTML copying, the **V9 Infinite Fidelity** engine uses advanced headless browser automation and AI-driven "healing" to produce pixel-perfect clones.
+SiteCloner v1.5 is a professional-grade archival suite designed to capture, reconstruct, and preserve modern websites with extreme precision. Moving beyond simple HTML copying, the **V10 Guardian Bypass** engine uses advanced headless browser automation and AI-driven "healing" to produce pixel-perfect clones.
 
 ### 🌟 Key Architectural Upgrades
 
-#### 🛡️ V9: Infinite Fidelity Preview (NEW)
-- **Preview Shield (Service Worker)**: A dedicated interception layer that forces browsers to resolve every asset correctly, re-routing absolute paths (like Next.js/React statics) to local archives.
-- **Absolute Launch (New Tab)**: Bypasses `X-Frame-Options` and secure frame-blocking headers, allowing you to view clones in a dedicated, 100% stable environment.
+#### 🛡️ V10: Guardian Bypass (NEW)
+- **Surgical Extraction**: Automatically identifies and purges reCAPTCHA, hCaptcha, and Cloudflare Turnstile blocks.
+- **Project Janitor Upgrade**: Ensures static archives are 100% clean of broken verification widgets that cannot work offline.
+
+#### 🛡️ V9: Infinite Fidelity Preview
+- **Preview Shield (Service Worker)**: A dedicated interception layer that forces browsers to resolve every asset correctly.
 
 #### 🌊 V8: Deep Crawl "Absolute Power"
 - **Recursive Scraper**: Discovers and archives entire website structures by following internal same-origin links automatically.

@@ -163,6 +163,21 @@ export class SiteCloner extends EventEmitter {
       await this.waitForStability(page);
       await this.waitForFonts(page);
 
+      // V10: Guardian Bypass — Surgical Removal of CAPTCHA/Verification Blocks
+      await page.evaluate(() => {
+        const guardianSelectors = [
+          '.g-recaptcha', 'iframe[src*="recaptcha"]', 'script[src*="recaptcha"]',
+          '.h-captcha', 'iframe[src*="hcaptcha"]',
+          '.cf-turnstile', 'iframe[src*="turnstile"]',
+          '.captcha-container'
+        ];
+        
+        guardianSelectors.forEach(selector => {
+          const elements = document.querySelectorAll(selector);
+          elements.forEach(el => el.remove());
+        });
+      });
+
       // Serializing
       const domSerializer = new DOMSerializer();
       const { html, metaInfo } = await domSerializer.serialize(page);
