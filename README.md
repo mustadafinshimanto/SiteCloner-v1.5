@@ -15,6 +15,14 @@ SiteCloner is a premium, AI-powered tool architected by **mustadafinshimanto** f
 *   **Deep CSS Extraction**: Aggressively captures keyframes and font-faces, optimized for modern framework-heavy sites.
 *   **Quick Preview**: Generates a local `run.bat` for every clone for one-click launching.
 
+## 🛠️ Tech Stack
+
+*   **Architected by**: mustadafinshimanto
+*   **Engine**: Puppeteer (Headless Chrome)
+*   **Backend**: Node.js / Express
+*   **Intelligence**: Google Gemini 2.5 & DeepSeek V3
+*   **Frontend**: Professional Glassmorphic Dashboard
+
 ## 🤖 What the AI Does (V6 Ultra Engine)
 
 SiteCloner isn't just a blind downloader—it's an **AI-powered architect** that "heals" the website after capture. The integrated Gemini/DeepSeek engine performs the following mission-critical tasks:
