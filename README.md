@@ -11,7 +11,7 @@
 
 ---
 
-## 💎 The V12 "Cinematic Mastery" Vision
+## 💎 The Cinematic Mastery Vision
 
 **SiteCloner v3.1** is a professional-grade archival suite architected to capture, reconstruct, and preserve modern websites with zero-loss precision. Moving beyond standard static scraping, the **Cinematic Overdrive** engine leverages advanced headless browser automation and AI-driven neural healing to produce high-fidelity clones of even the most complex web infrastructures—including 100% accurate background video archival.
 
@@ -24,28 +24,17 @@
 
 ---
 
-## ⚡ The Cinematic Mastery Matrix
-
-| Generation | Breakthrough | Capability |
-| :--- | :--- | :--- |
-| **V12** | **Neural ZIP Restore** | Absolute download integrity with high-fidelity MIME headers and resilient .zip archival. |
-| **V11** | **Cinematic Overdrive** | Neural Media Heartbeat (Force-Play) and Resilient Media Interception for 100% background video capture. |
-| **V10** | **Guardian Bypass** | Automated surgical extraction of reCAPTCHA, hCaptcha, and Cloudflare Turnstile verification blocks. |
-| **V9** | **Infinite Preview** | Service Worker "Preview Shield" for 100% asset resolution and **Absolute Launch** iframe bypass. |
-| **V8** | **Deep Crawl** | Recursive discovery and archival of entire multi-page domain structures with internal link remapping. |
-
----
 
 ## 🛡️ Key Architectural Pillars
 
-### 🧹 Project Janitor Protocol (V10)
+### 🧹 Project Janitor Protocol
 SiteCloner isn't just about copying; it's about cleaning. The **Project Janitor** automatically identifies and purges:
 - 🚫 **Security Guardians**: reCAPTCHA, hCaptcha, and Turnstile blocks.
 - 🚫 **UI Friction**: Consent banners, cookie modals, and non-functional disclaimer popups.
 - 🚫 **Broken Scripts**: Neutralization of non-functional server-side dependency scripts.
 
-### 🌈 Infinite Fidelity Preview (V9)
-The V9 Preview system introduces the **Preview Shield**, a specialized Service Worker that intercepts and corrects all browser requests. This ensures that even sites using modern routing (Next.js/React) resolve every asset correctly in your local environment.
+### 🌈 Infinite Fidelity Preview
+The Preview system introduces the **Preview Shield**, a specialized Service Worker that intercepts and corrects all browser requests. This ensures that even sites using modern routing (Next.js/React) resolve every asset correctly in your local environment.
 
 ### 🧠 AI-Native Neural Healing
 Powered by **Google Gemini 1.5 Flash**, SiteCloner performs a "Deep-Scan" on failed network traces to fix broken paths and restore layout fidelity in real-time.
@@ -62,10 +51,10 @@ Powered by **Google Gemini 1.5 Flash**, SiteCloner performs a "Deep-Scan" on fai
 
 ```bash
 # Clone the Absolute Power suite
-git clone https://github.com/mustadafinshimanto/SiteCloner-v2.0.git
+git clone https://github.com/mustadafinshimanto/SiteCloner.git
 
 # Enter the foundry
-cd SiteCloner-v2.0
+cd SiteCloner
 
 # Forge the dependencies
 npm install
